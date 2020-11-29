@@ -3,37 +3,36 @@ import time
 
 mat = ("сук", 'xуй', "пидр", "бля", "го")
 
-ranks = [{"name": "tester100#3585", "rank": 0}, {"name": "gagarinten#5622","rank" : 0}]
-get_rank_bool = None
+ranks = [{"name": "tester100#3585", "rank": 0}, {"name": "gagarinten#5622", "rank": 0}]
+
 
 class XCLient(discord.Client):
     async def on_ready(self):
         print(f'Logged in as {self.user.name}')
 
     async def on_message(self, message):
+        user_name = str(message.author)
         user = message.author
         print(user)
         args = message.content
         chan = message.channel
         guild = message.author.guild
-        print(message)
-        x = 0
+        k = 0
+        print(ranks)
+
         for i, s in enumerate(ranks):
-            print("add")
-            if s["name"] == str(user):
-                get_rank_bool = True
+            print(s['name'], ' == ', user_name, s['name'] == user_name)
+            if s['name'] == user_name:
                 print(s)
-                print(ranks[i]["rank"])
-                ranks[i]["rank"] = ranks[i]["rank"] + 1
-                print(ranks[i]["rank"])
-                print(ranks[i]["name"])
-            else:
-                ranks.append({"name": user.name+'#'+user.discriminator, "rank": 1})
-                break
+                print(ranks[i]['rank'])
+                ranks[i]['rank'] += 1
+                print(ranks[i]['rank'])
+                k = 1
+        if k == 0:
+            ranks.append({'name': user.name + '#' + user.discriminator, 'rank': 1})
+
         for s in ranks:
             print(s)
-
-
 
         for x in mat:
             if x in args.lower():
