@@ -44,7 +44,7 @@ class XCLient(discord.Client):
                 embed.set_image(
                     url="https://cdn.discordapp.com/attachments/768082564019126292/782184876102254592/489d22e04e9ea5f8.png")
                 await chan.send(embed=embed)
-                time.sleep(1)
+                time.sleep(86400)
                 embed = discord.Embed(color=0xFF7C00, title="Пользователь " + f"@{user} Разбанен.Возврощайся")
                 embed.set_image(
                     url="https://cdn.discordapp.com/attachments/768082564019126292/782222100780810250/2017-01-06-11-04-1982b2d7e556bdb895daece3edfa0789.jpg")
