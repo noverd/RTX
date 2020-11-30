@@ -23,6 +23,8 @@ class XCLient(discord.Client):
         print("Текст сообщения: " + args)
         print("Имя отправителя: " + user_name)
         print("ID отправителя: " + str(ID))
+        if bool(user.nick):
+            print("Ник отправителя: " + str(user.nick))
         print("Имя отправителя ник? = " + str(bool(user.nick)))
         print("Автор бот? = " + str(user.bot))
         print("Название сервера: " + str(guild.name))
