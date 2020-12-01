@@ -1,9 +1,19 @@
 import discord
 import time
+from discord.ext import commands
+
+TOKEN = 'NzgzMzE4NDMyODMyNTUyOTgy.X8ZAIw.ZLvTDoEDl89U3x32NZfc2JDBEYY'
+bot = commands.Bot(command_prefix='!')
 
 mat = ("сук", 'xуй', "пидр", "бля", "го")
 
-ranks = [{"ID": 776096588048367646, "name": "tester100#3585", "rank": 0}]
+ranks = [{"ID": 776096588048367646, "name": "tester100#3585", "rank": 0, "server_name": "GG3's server",
+          "server_id": "710860566184329268", "member_count": 4}]
+
+
+@bot.command()
+async def test(ctx, argu):  # создаем асинхронную фунцию test, читаем аргумент arg
+    await ctx.send(argu)  # отправляем обратно аргумент
 
 
 class XCLient(discord.Client):
@@ -32,17 +42,18 @@ class XCLient(discord.Client):
         print("Количество членов сервера:" + str(guild.member_count))
         print(ranks)
 
-
         for i, s in enumerate(ranks):
             print(s["ID"], ' == ', ID, s['ID'] == ID)
-            if s["ID"] == ID:
+            if s["ID"] == ID and s["server_id"] == str(guild.id):
                 print(s)
                 print(ranks[i]['rank'])
                 ranks[i]['rank'] += 1
                 print(ranks[i]['rank'])
                 k = 1
         if k == 0:
-            ranks.append({"ID": ID, 'name': user_name + '#' + user.discriminator, 'rank': 1})
+            ranks.append(
+                {"ID": ID, 'name': user_name, 'rank': 1, "server_name": str(guild.name),
+                 "server_id": str(guild.id), "member_count": str(guild.member_count)})
 
         for s in ranks:
             print(s)
@@ -65,6 +76,16 @@ class XCLient(discord.Client):
                 await discord.Guild.unban(guild, user=user, reason="Ты плахая папапо")
                 return
 
+        if args.startswith('!'):
+            commands_bot = args.split()
+            if args.startswith("!rank"):
+                for i, s in enumerate(ranks):
+                    if str(s["ID"]) == str(ID) and str(s["server_id"]) == str(guild.id):
+                        chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
+                    else:
+                        print("error")
 
-client = XCLient()
-client.run("Nzc2MDk2NTg4MDQ4MzY3NjQ2.X6v6RQ.tFO5oKzXF6vcJCLvQlGRJRMq9NQ")
+
+if __name__ == '__main__' or True:
+    client = XCLient()
+    client.run(TOKEN)
