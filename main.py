@@ -1,19 +1,13 @@
 import discord
 import time
-from discord.ext import commands
 
 TOKEN = 'NzgzMzE4NDMyODMyNTUyOTgy.X8ZAIw.ZLvTDoEDl89U3x32NZfc2JDBEYY'
-bot = commands.Bot(command_prefix='!')
 
 mat = ("сук", 'xуй', "пидр", "бля", "го")
 
 ranks = [{"ID": 776096588048367646, "name": "tester100#3585", "rank": 0, "server_name": "GG3's server",
           "server_id": "710860566184329268", "member_count": 4}]
 
-
-@bot.command()
-async def test(ctx, argu):  # создаем асинхронную фунцию test, читаем аргумент arg
-    await ctx.send(argu)  # отправляем обратно аргумент
 
 
 class XCLient(discord.Client):
@@ -44,7 +38,7 @@ class XCLient(discord.Client):
 
         for i, s in enumerate(ranks):
             print(s["ID"], ' == ', ID, s['ID'] == ID)
-            if s["ID"] == ID and s["server_id"] == str(guild.id):
+            if s["ID"] == ID and s["server_id"] == str(guild.id) and not args.startswith("!"):
                 print(s)
                 print(ranks[i]['rank'])
                 ranks[i]['rank'] += 1
@@ -80,9 +74,10 @@ class XCLient(discord.Client):
             commands_bot = args.split()
             if args.startswith("!rank"):
                 for i, s in enumerate(ranks):
-                    if str(s["ID"]) == str(ID) and str(s["server_id"]) == str(guild.id):
-                        chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
+                    if s["ID"] == ID and str(s["server_id"]) == str(guild.id):
+                        await chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
                     else:
+                        print()
                         print("error")
 
 
