@@ -1,5 +1,6 @@
 import discord
-import os
+comm = ["!rank"]
+
 import time
 from dataranks import r as ranks
 
@@ -36,12 +37,13 @@ class XCLient(discord.Client):
         print("Количество членов сервера:" + str(guild.member_count))
         print(ranks)
 
-        if args.startswith('!'):
+        if args.startswith("!rank"):
             commands_bot = args.split()
             if args.startswith("!rank"):
                 for i, s in enumerate(ranks):
                     if s["ID"] == ID and str(s["server_id"]) == str(guild.id):
                         await chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
+                        break
                     else:
                         print("error")
 
@@ -62,7 +64,7 @@ class XCLient(discord.Client):
             f = open("dataranks.py", "r+")
             f.write('r = [\n')
             for i in ranks:
-                f.write(f'{str(i)},\n')
+                f.write(f',\n{str(i)}')
             f.write(']')
             f.close()
             for s in ranks:
