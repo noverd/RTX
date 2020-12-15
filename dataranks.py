@@ -1,10 +1,6 @@
 r = [
-{'ID': 720879793645551697, 'name': 'Jaétom#1441', 'rank': 172, 'server_name': 'Ñåğâåğ Ïàétom', 'server_id': '783319282024054786', 'member_count': '2'},
-{'ID': 720879793645551697, 'name': 'Jaétom#1441', 'rank': 78, 'server_name': 'tomjas', 'server_id': '783319350563700746', 'member_count': '2'},
-{'ID': 720879793645551697, 'name': 'Jaétom#1441', 'rank': 78, 'server_name': 'tomjas', 'server_id': '783319350563700746', 'member_count': '2'},
-{'ID': 783318432832552982, 'name': 'Brobux#3325', 'rank': 10, 'server_name': 'tomjas', 'server_id': '783319350563700746', 'member_count': '2'},
-{'ID': 783318432832552982, 'name': 'Brobux#3325', 'rank': 18, 'server_name': 'Ñåğâåğ Ïàétom', 'server_id': '783319282024054786', 'member_count': '2'},
-{'ID': 720879793645551697, 'name': 'Jaétom#1441', 'rank': 169, 'server_name': 'Ñåğâåğ Ïàétom', 'server_id': '783319282024054786', 'member_count': '2'},
-{'ID': 720879793645551697, 'name': 'Jaétom#1441', 'rank': 158, 'server_name': 'Ñåğâåğ Ïàétom', 'server_id': '783319282024054786', 'member_count': '2'},
-{'ID': 720879793645551697, 'name': 'Jaétom#1441', 'rank': 1, 'server_name': 'tomjas', 'server_id': '783319350563700746', 'member_count': '2'},
+{'ID': 788448627898056706, 'name': 'RankXerBot#8987', 'rank': 3, 'server_name': 'All it', 'server_id': '758312557814480896', 'member_count': '6'},
+{'ID': 715483370515333200, 'name': 'Lexa#3742', 'rank': 8, 'server_name': 'All it', 'server_id': '758312557814480896', 'member_count': '6'},
+{'ID': 705716430213218404, 'name': 'gagarinten#5622', 'rank': 20, 'server_name': 'All it', 'server_id': '758312557814480896', 'member_count': '6'},
+{'ID': 715483370515333200, 'name': 'Lexa#3742', 'rank': 7, 'server_name': 'All it', 'server_id': '758312557814480896', 'member_count': '6'},
 ]

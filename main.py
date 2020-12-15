@@ -4,7 +4,7 @@ comm = ["!rank"]
 import time
 from dataranks import r as ranks
 
-TOKEN = 'NzgzMzE4NDMyODMyNTUyOTgy.X8ZAIw.ZLvTDoEDl89U3x32NZfc2JDBEYY'
+TOKEN = 'Nzg4NDQ4NjI3ODk4MDU2NzA2.X9jqAQ.-ULEkwsCHqRJ4bULlAxQ7MYRn2s'
 
 mat = ("сук", 'xуй', "пидр", "бля")
 
