@@ -6,7 +6,7 @@ from dataranks import r as ranks
 
 TOKEN = 'NzgzMzE4NDMyODMyNTUyOTgy.X8ZAIw.ZLvTDoEDl89U3x32NZfc2JDBEYY'
 
-mat = ("сук", 'xуй', "пидр", "бля", "го")
+mat = ("сук", 'xуй', "пидр", "бля")
 
 
 class XCLient(discord.Client):
@@ -15,8 +15,6 @@ class XCLient(discord.Client):
         print(f"ID bot:{self.user.id}")
 
     async def on_message(self, message):
-        f = open("dataranks.py", "w")
-        f.close()
         user_name = str(message.author)
         user = message.author
         ID = user.id
@@ -48,7 +46,8 @@ class XCLient(discord.Client):
                         print("error")
 
         else:
-
+            f = open("dataranks.py", "w")
+            f.close()
             for i, s in enumerate(ranks):
                 print(s['ID'], ' == ', ID, s['ID'] == ID)
                 if s["ID"] == ID and s["server_id"] == str(guild.id) and not args.startswith("!"):
@@ -64,7 +63,7 @@ class XCLient(discord.Client):
             f = open("dataranks.py", "r+")
             f.write('r = [\n')
             for i in ranks:
-                f.write(f',\n{str(i)}')
+                f.write(f'{str(i)},\n')
             f.write(']')
             f.close()
             for s in ranks:
