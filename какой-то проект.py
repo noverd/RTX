@@ -1,5 +1,6 @@
-
+import emoji
 import discord
+from discord import Member
 
 comm = ["!rank"]
 import time
