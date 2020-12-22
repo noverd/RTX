@@ -37,23 +37,18 @@ class XCLient(discord.Client):
         print("Количество членов сервера:" + str(guild.member_count))
         print(ranks)
 
-        if args.startswith("!"):
-            print("Это команда")
-            commands_bot1 = args.split()
-            commands_bot1[1:]
-            commands_bot = ''
-            for i in commands_bot1:
-                commands_bot = commands_bot + i
-            print
+        if args.startswith("!rank"):
+            kos = 0
+            commands_bot = args.split()
             if args.startswith("!rank"):
-                print("Вызов команды !rank")
                 for i, s in enumerate(ranks):
-                    if s["ID"] == ID and str(s["server_id"]) == str(guild.id):
+                    if s["ID"] == ID and str(s["server_id"]) == str(guild.id) and kos == 0:
                         await chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
+                        print("ранг найден")
+                        kos = 1
                         break
-                    else:
-                        print("error")
-            if args.startswith("!buy"):
+                    else:continue
+            elif args.startswith("!buy"):
                 print("Команда !buy")
                 for i, s in enumerate(ranks):
                     if s["ID"] == ID and s["server_id"] == str(guild.id):
@@ -67,6 +62,8 @@ class XCLient(discord.Client):
                     await client.add_roles(user, role)
                 elif commands_bot in "Доступкгалерее" and cash < 50:
                     await chan.send("У вас не достаточно ранга!")
+                else:
+                    print("error")
 
 
         else:
@@ -85,6 +82,7 @@ class XCLient(discord.Client):
                     {"ID": ID, 'name': user_name, 'rank': 1, "server_name": str(guild.name),
                      "server_id": str(guild.id), "member_count": str(guild.member_count)})
             f = open("dataranks.py", "r+")
+            f.write('# coding: utf8')
             f.write('r = [\n')
             for i in ranks:
                 f.write(f'{str(i)},\n')
