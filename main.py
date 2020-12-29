@@ -1,12 +1,13 @@
 import discord
-comm = ["!rank"]
-
 import time
+
 from dataranks import r as ranks
+
+comm = ["!rank"]
 
 TOKEN = 'Nzg4NDQ4NjI3ODk4MDU2NzA2.X9jqAQ.-ULEkwsCHqRJ4bULlAxQ7MYRn2s'
 
-mat = ("сук", 'xуй', "пидр", "бля")
+mat = ("сук", 'xуй', "пидр", "бля", "лядь", "fuck")
 
 
 class XCLient(discord.Client):
@@ -36,14 +37,12 @@ class XCLient(discord.Client):
         print(ranks)
 
         if args.startswith("!rank"):
-            commands_bot = args.split()
-            if args.startswith("!rank"):
-                for i, s in enumerate(ranks):
-                    if s["ID"] == ID and str(s["server_id"]) == str(guild.id):
-                        await chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
-                        break
-                    else:
-                        print("error")
+            for i, s in enumerate(ranks):
+                if s["ID"] == ID and str(s["server_id"]) == str(guild.id):
+                    await chan.send(f"{user.mention} твой ранг - {str(ranks[i]['rank'])}")
+                    break
+                else:
+                    print("error")
 
         else:
             f = open("dataranks.py", "w")
@@ -71,20 +70,22 @@ class XCLient(discord.Client):
 
             for x in mat:
                 if x in args.lower():
-                    await chan.send("не матерись")
+                    await chan.send(f'{user.mention} не матерись!')
                     time.sleep(2)
-                    await discord.Guild.ban(guild, user=user, reason="Ты плахая папапо", delete_message_days=1)
+                    await discord.Guild.ban(guild, user=user, reason="Нецензурная лексика", delete_message_days=1)
                     embed = discord.Embed(color=0xFF7C00,
-                                          title="Пользователь " + f"@{user} был забанен на 24 часа.Причана - маты")
+                                          title=f"Пользователь {user.mention} был забанен на 24 часа. Причана - маты")
                     embed.set_image(
                         url="https://cdn.discordapp.com/attachments/768082564019126292/782184876102254592/489d22e04e9ea5f8.png")
                     await chan.send(embed=embed)
+                    print(f'Забанен {user}')
                     time.sleep(86400)
-                    embed = discord.Embed(color=0xFF7C00, title="Пользователь " + f"@{user} Разбанен.Возврощайся")
+                    embed = discord.Embed(color=0xFF7C00, title=f"Пользователь {user.mention} разбанен. Возврощайся")
                     embed.set_image(
                         url="https://cdn.discordapp.com/attachments/768082564019126292/782222100780810250/2017-01-06-11-04-1982b2d7e556bdb895daece3edfa0789.jpg")
                     await chan.send(embed=embed)
-                    await discord.Guild.unban(guild, user=user, reason="Ты плахая папапо")
+                    await discord.Guild.unban(guild, user=user, reason="Прошел срок")
+                    print(f'Разбанен {user}')
                     return
 
 
