@@ -1,29 +1,29 @@
 import discord
 import time
 
-from dataranks import r as ranks
-
-comm = ["!rank"]
-
-TOKEN = 'Nzg4NDQ4NjI3ODk4MDU2NzA2.X9jqAQ.-ULEkwsCHqRJ4bULlAxQ7MYRn2s'
-
-mat = ("сук", 'xуй', "пидр", "бля", "лядь", "fuck")
+from dataranks import rank as ranks
 
 
-class XCLient(discord.Client):
+
+TOKEN = 'Токен Скрыт)'
+
+mat = ("сук", 'xуй', "пидр", "бля", "лядь", "fuck")#Вы можете добавить сюда маты
+
+
+class XCLient(discord.Client):#Это экземляр класса клиента
     async def on_ready(self):
         print(f'Logged in as {self.user.name}')
         print(f"ID bot:{self.user.id}")
 
-    async def on_message(self, message):
-        user_name = str(message.author)
+    async def on_message(self, message):#Функиция обробатки сообщений
+        user_name = str(message.author)#Определение переменных нужных для работы
         user = message.author
         ID = user.id
         args = message.content
         chan = message.channel
         guild = message.author.guild
         k = 0
-        print("Всё сообщение: " + str(message))
+        print("Всё сообщение: " + str(message))#Вывод информации о отправителе
         print("Текст сообщения: " + args)
         print("Имя отправителя: " + user_name)
         print("ID отправителя: " + str(ID))
@@ -36,7 +36,7 @@ class XCLient(discord.Client):
         print("Количество членов сервера:" + str(guild.member_count))
         print(ranks)
 
-        if args.startswith("!rank"):
+        if args.startswith("!rank"): #Определение команд
             for i, s in enumerate(ranks):
                 if s["ID"] == ID and str(s["server_id"]) == str(guild.id):
                     await chan.send(f"{user.mention} твой ранг - {str(ranks[i]['rank'])}")
@@ -45,7 +45,7 @@ class XCLient(discord.Client):
                     print("error")
 
         else:
-            f = open("dataranks.py", "w")
+            f = open("dataranks.py", "w")#Чтение и запись в файл dataranks.py
             f.close()
             for i, s in enumerate(ranks):
                 print(s['ID'], ' == ', ID, s['ID'] == ID)
@@ -68,7 +68,7 @@ class XCLient(discord.Client):
             for s in ranks:
                 print(s)
 
-            for x in mat:
+            for x in mat:#определение матов
                 if x in args.lower():
                     await chan.send(f'{user.mention} не матерись!')
                     time.sleep(2)
@@ -89,6 +89,6 @@ class XCLient(discord.Client):
                     return
 
 
-if __name__ == '__main__' or True:
+if __name__ == '__main__' or True:#СпиДRun
     client = XCLient()
     client.run(TOKEN)
