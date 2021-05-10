@@ -1,11 +1,10 @@
-
 import discord
 
 comm = ["!rank"]
 import time
 from dataranks import r as ranks
 
-TOKEN = 'Nzg4NDQ4NjI3ODk4MDU2NzA2.X9jqAQ.-ULEkwsCHqRJ4bULlAxQ7MYRn2s'
+TOKEN = 'Nzg4NDQ4NjI3ODk4MDU2NzA2.X9jqAQ.IvKSnF5Ry_DU9wyoAf94ZSj75pM'
 
 mat = ("сук", 'xуй', "пидр", "бля")
 
@@ -68,18 +67,26 @@ class XCLient(discord.Client):
                     for s in ranks:
                         print(s)
             elif body == "buy":
-                buy_arg = str(arg)
+                buy_arg = arg[0]
+                for i,x in enumerate(arg):
+                    print()
+                    if i == 0:
+                        print("cont")
+                        continue
+                    buy_arg = buy_arg+" "+x
+                    print("add")
+                print(buy_arg)
                 print("Команда !buy")
                 for i, s in enumerate(ranks):
                     if s["ID"] == ID and s["server_id"] == str(guild.id):
                         print(ranks[i]["rank"])
                         cash = int(ranks[i]["rank"])
                         print(cash)
-                if arg[1] == "Доступ к галерее" and cash > 999:
+                if buy_arg == "Доступ к галерее" and cash > 9999:
                     print(message.author.guild.name)
                     role = discord.utils.get(message.guild.roles, name="Доступ в Галерею")
-                    await user.member.add_roles(user, role)
-                elif arg[1] == "Доступ к галерее" and cash < 1000:
+                    await user.add_roles(role)
+                elif buy_arg == "Доступ к галерее" and cash < 10000:
                     await chan.send("У вас не достаточно ранга!")
                 else:
                     print("error")
