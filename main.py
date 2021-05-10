@@ -37,10 +37,14 @@ class XCLient(discord.Client):
         print("Количество членов сервера:" + str(guild.member_count))
         print(ranks)
 
-        if args.startswith("!rank"):
+        if args.startswith("!"):
             kos = 0
-            commands_bot = args.split()
-            if args.startswith("!rank"):
+            body = args.split("!")[1].split()[0]
+            arg = args.split("!")[1].split()
+            print(f"Тело команды: {body}")
+            print(f"Аргменты {arg}")
+            del arg[0]
+            if body == "rank":
                 for i, s in enumerate(ranks):
                     if s["ID"] == ID and str(s["server_id"]) == str(guild.id) and kos == 0:
                         await chan.send("Ваш ранг равен: " + str(ranks[i]["rank"]))
@@ -48,19 +52,34 @@ class XCLient(discord.Client):
                         kos = 1
                         break
                     else:continue
-            elif args.startswith("!buy"):
+                if kos == 0:
+                    f = open("dataranks.py","w")
+                    f.close()
+                    ranks.append(
+                        {"ID": ID, 'name': user_name, 'rank': len(args), "server_name": str(guild.name),
+                         "server_id": str(guild.id), "member_count": str(guild.member_count)})
+                    f = open("dataranks.py", "r+")
+                    f.write('# coding: utf8\n')
+                    f.write('r = [\n')
+                    for i in ranks:
+                        f.write(f'{str(i)},\n')
+                    f.write(']')
+                    f.close()
+                    for s in ranks:
+                        print(s)
+            elif body == "buy":
+                buy_arg = str(arg)
                 print("Команда !buy")
                 for i, s in enumerate(ranks):
                     if s["ID"] == ID and s["server_id"] == str(guild.id):
                         print(ranks[i]["rank"])
-                        cash = ranks[i]["rank"]
+                        cash = int(ranks[i]["rank"])
                         print(cash)
-                        print(commands_bot)
-                if commands_bot in "!buyДоступкгалерее" and cash > 50:
-                    print(message.author.guild.ser)
-                    role = discord.utils.get(message.server.roles, name="Доступ в Галерею")
-                    await client.add_roles(user, role)
-                elif commands_bot in "Доступкгалерее" and cash < 50:
+                if arg[1] == "Доступ к галерее" and cash > 999:
+                    print(message.author.guild.name)
+                    role = discord.utils.get(message.guild.roles, name="Доступ в Галерею")
+                    await user.member.add_roles(user, role)
+                elif arg[1] == "Доступ к галерее" and cash < 1000:
                     await chan.send("У вас не достаточно ранга!")
                 else:
                     print("error")
@@ -74,15 +93,16 @@ class XCLient(discord.Client):
                 if s["ID"] == ID and s["server_id"] == str(guild.id) and not args.startswith("!"):
                     print(s)
                     print(ranks[i]['rank'])
-                    ranks[i]['rank'] += 1
+                    ranks[i]['rank'] += len(args)
                     print(ranks[i]['rank'])
                     k = 1
             if k == 0:
+
                 ranks.append(
-                    {"ID": ID, 'name': user_name, 'rank': 1, "server_name": str(guild.name),
+                    {"ID": ID, 'name': user_name, 'rank': len(args), "server_name": str(guild.name),
                      "server_id": str(guild.id), "member_count": str(guild.member_count)})
             f = open("dataranks.py", "r+")
-            f.write('# coding: utf8')
+            f.write('# coding: utf8\n')
             f.write('r = [\n')
             for i in ranks:
                 f.write(f'{str(i)},\n')
