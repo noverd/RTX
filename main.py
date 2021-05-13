@@ -8,87 +8,88 @@ deflaut_permission_shop = "ADMINISTRATOR"
 deflaut_prefix = "!"
 deflaut_prefix_permission = "ADMINISTRATOR"
 buy_item = ["Доступ к галерее"]
-buy_list = ["!buy Доступ к галерее"]
 buy_cash = ["1000"]
 buy_descriptor = ["Роль для доступа в галерею"]
-TOKEN = 'ODQxNjYxMjM4NDM2OTU0MTMy.YJqAHA.aMM2L6MtEmEVZgy8QFnhgzED8Cw'
+TOKEN = 'ODQyMzMyMDQ2MDgwMDgxOTYw.YJzw2Q.VmeH1pt8vl5s9onucSDsZerHHVQ'
 works = ["Вы продали себя в рабство на 30 лет.", "Вы устроились тестировщиком лекарств. У вас теперь 3 руки",
          "Вы стали горничной и работали 95. Но за это время инфляция...",
          "Вы ушли в армию.Вы заработали там 5.900.156 :dollar: .  Но расходы на лечение..."]
 mat = ("сук", 'xуй', "пидр", "бля")
 
 
-def permission(per, role):
+def permission(per, role: str):
+    print(per)
+    print(role)
     if role == "ADMINISTRATOR":
-        return per.administrator()
+        return per.administrator
     elif role == "INVITE":
-        return per.create_instant_invite()
+        return per.create_instant_invite
     elif role == "KICK":
-        return per.kick_members()
+        return per.kick_members
     elif role == "BAN":
-        return per.ban_members()
+        return per.ban_members
     elif role == "MANAGE_CHANNEL":
-        return per.manage_channels()
+        return per.manage_channels
     elif role == "MANAGE_GUILD":
-        return per.manage_guild()
+        return per.manage_guild
     elif role == "REACTION":
-        return per.add_reactions()
+        return per.add_reactions
     elif role == "GUILD":
-        return per.manage_guild()
+        return per.manage_guild
     elif role == "AUDIT_LOG":
-        return per.view_audit_log()
+        return per.view_audit_log
     elif role == "SUPER_SPEAKER":
-        return per.priority_speaker()
+        return per.priority_speaker
     elif role == "STREAM":
-        return per.stream()
+        return per.stream
     elif role == "READ_MESSAGE":
-        return per.read_message()
+        return per.read_message
     elif role == "VIEW_CHANNEL":
-        return per.view_channel()
+        return per.view_channel
     elif role == "SEND_MESSAGE":
-        return per.send_messages()
+        return per.send_messages
     elif role == "SEND_TTS_MESSAGE":
-        return per.send_tts_messages()
+        return per.send_tts_messages
     elif role == "MODERATION":
-        return per.manage_messages()
+        return per.manage_messages
     elif role == "EMBED":
-        return per.embed_links()
+        return per.embed_links
     elif role == "SEND_FILE":
-        return per.attach_files()
+        return per.attach_files
     elif role == "READ_HISTORY_MESSAGE":
-        return per.read_message_history()
+        return per.read_message_history
     elif role == "PING_EVERYONE":
-        return per.mention_everyone()
+        return per.mention_everyone
     elif role == "EXTERNAL_EMOJI":
-        return per.external_emojis()
+        return per.external_emojis
     elif role == "USE_EXTERNAL_EMOJI":
-        return per.use_external_emojis()
+        return per.use_external_emojis
     elif role == "VIEW_INTEGRATION":
-        return per.view_guild_insights()
+        return per.view_guild_insights
     elif role == "CONNECT":
-        return per.connect()
+        return per.connect
     elif role == "SPEAK":
-        return per.speak()
+        return per.speak
     elif role == "MUTE_VOICE":
-        return per.mute_members()
+        return per.mute_members
     elif role == "DEAFEN":
-        return per.deafen_members()
+        return per.deafen_members
     elif role == "MOVE_VOICE":
-        return per.move_members()
+        return per.move_members
     elif role == "VOICE_ACTIVATE":
-        return per.use_voice_activation()
+        return per.use_voice_activation
     elif role == "CHANGE_NICK":
-        return per.change_nickname()
+        return per.change_nickname
     elif role == "MANAGE_ROLE":
-        return per.manage_roles()
+        return per.manage_roles
     elif role == "MANAGE_PERMISSION":
-        return per.manage_permissions()
+        return per.manage_permissions
     elif role == "MANAGE_WEBHOOK":
-        return per.manage_webhooks()
+        return per.manage_webhooks
     elif role == "USE_SLASH_COMMAND":
-        return per.use_slash_commands()
+        return per.use_slash_commands
     elif role == "REQUEST_TO_SPEAK":
-        return per.request_to_speak()
+        return per.request_to_speak
 
 
 class XCLient(discord.Client):
@@ -109,6 +110,8 @@ class XCLient(discord.Client):
         for i, s in enumerate(server_cfg):
             if s["id"] == guild.id:
                 nomer = i
+                print(nomer)
+                print(type(nomer))
                 prefix = s["prefix"]
                 add_to_shop = s["permission_shop"]
                 prefix_permission = s["permission_set_prefix"]
@@ -116,7 +119,7 @@ class XCLient(discord.Client):
         if kost:
             server_cfg.append({"id": guild.id, "name": guild.name, "prefix": deflaut_prefix,
                                "permission_shop": deflaut_permission_shop,
-                               "permission_set_prefix": deflaut_prefix_permission})
+                               "permission_set_prefix": deflaut_prefix_permission, "shop_list": {}})
             prefix = deflaut_prefix
             add_to_shop = deflaut_permission_shop
             prefix_permission = deflaut_prefix_permission
@@ -133,14 +136,14 @@ class XCLient(discord.Client):
         print("ID сервера: " + str(guild.id))
         print("Количество членов сервера:" + str(guild.member_count))
         print(ranks)
-
+        print(f"Права: {user.guild_permissions.value}")
         if args.startswith(prefix):
             kos = 0
-            body = args.split("!")[1].split()[0]
-            arg = args.split("!")[1].split()
+            body = args.split(prefix)[1].split()[0]
+            arg = args.split(prefix)[1].split()
+            del arg[0]
             print(f"Тело команды: {body}")
             print(f"Аргменты {arg}")
-            del arg[0]
             if body == "buy":
                 buy_arg = arg[0]
                 for i, x in enumerate(arg):
@@ -165,7 +168,8 @@ class XCLient(discord.Client):
                 else:
                     if buy_arg == "list":
                         buy_item_list = ""
-                        for i, x in enumerate(buy_item):
+                        for i, x in enumerate(server_cfg[nomer]["shop_list"]):
+                            print(x)
                             buy_item_list = buy_item_list + "`" + buy_item[i] + "` - " + buy_descriptor[
                                 i] + ". Цена - " + buy_cash[i] + " :dollar:\n"
                         print(buy_item_list)
@@ -188,8 +192,13 @@ class XCLient(discord.Client):
                                                 description=f"Твой баланс: {ranks[i]['cash']} :dollar:\nЗаработать деньги - `{prefix}work`\n Первести деньги(Не реализованно) - `{prefix}give`\nКупить что-то - `{prefix}buy`(Посмотреть что купить - `!buy list`)",
                                                 color=0x0beb10)
                         await chan.send(embed=balance)
-            elif body == "set_prefix" and permission(guild.guild_permissions, prefix_permission):
-                server_cfg[nomer]["prefix"] = arg[0]
+            elif body == "set_prefix" and permission(user.guild_permissions, prefix_permission):
+                print(nomer)
+                for i, s in enumerate(server_cfg):
+                    if s["id"] == guild.id:
+                        print(arg)
+                        server_cfg[i]["prefix"] = arg[0]
+                        prefix = arg[0]
                 embed = discord.Embed(title="Префик",
                                       description=f"Префикс успешно установлен!\n`{prefix}buy_add` - Добавить вещь в `{prefix}buy list`",
                                       color=0x0beb10)
