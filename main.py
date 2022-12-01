@@ -23,17 +23,17 @@ class XCLient(discord.Client):#Это экземляр класса клиент
         chan = message.channel
         guild = message.author.guild
         k = 0
-        print("Всё сообщение: " + str(message))#Вывод информации о отправителе
-        print("Текст сообщения: " + args)
-        print("Имя отправителя: " + user_name)
-        print("ID отправителя: " + str(ID))
+        print(f"Всё сообщение: {str(message)}")
+        print(f"Текст сообщения: {args}")
+        print(f"Имя отправителя: {user_name}")
+        print(f"ID отправителя: {str(ID)}")
         if bool(user.nick):
-            print("Ник отправителя: " + str(user.nick))
-        print("Имя отправителя ник? = " + str(bool(user.nick)))
-        print("Автор бот? = " + str(user.bot))
-        print("Название сервера: " + str(guild.name))
-        print("ID сервера: " + str(guild.id))
-        print("Количество членов сервера:" + str(guild.member_count))
+            print(f"Ник отправителя: {str(user.nick)}")
+        print(f"Имя отправителя ник? = {bool(user.nick)}")
+        print(f"Автор бот? = {str(user.bot)}")
+        print(f"Название сервера: {str(guild.name)}")
+        print(f"ID сервера: {str(guild.id)}")
+        print(f"Количество членов сервера:{str(guild.member_count)}")
         print(ranks)
 
         if args.startswith("!rank"): #Определение команд
@@ -59,12 +59,11 @@ class XCLient(discord.Client):#Это экземляр класса клиент
                 ranks.append(
                     {"ID": ID, 'name': user_name, 'rank': 1, "server_name": str(guild.name),
                      "server_id": str(guild.id), "member_count": str(guild.member_count)})
-            f = open("dataranks.py", "r+")
-            f.write('r = [\n')
-            for i in ranks:
-                f.write(f'{str(i)},\n')
-            f.write(']')
-            f.close()
+            with open("dataranks.py", "r+") as f:
+                f.write('r = [\n')
+                for i in ranks:
+                    f.write(f'{str(i)},\n')
+                f.write(']')
             for s in ranks:
                 print(s)
 
@@ -89,6 +88,5 @@ class XCLient(discord.Client):#Это экземляр класса клиент
                     return
 
 
-if __name__ == '__main__' or True:#СпиДRun
-    client = XCLient()
-    client.run(TOKEN)
+client = XCLient()
+client.run(TOKEN)
